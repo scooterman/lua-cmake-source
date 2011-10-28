@@ -26,13 +26,13 @@ add_definitions(-U_FORTIFY_SOURCE -fno-stack-protector -D_FILE_OFFSET_BITS=64)
 file(GLOB lua_files lj_*.c lib_*.c)
 
 set(ASM_FLAGS "")
-if(${ENFORCE_32_BIT} EQUAL "1")
+if(${ENFORCE_32_BIT})
 	set(ASM_FLAGS ${ASM_FLAGS} -m32)
-endif(${ENFORCE_32_BIT} EQUAL "1")
+endif(${ENFORCE_32_BIT})
 
-if(${ENFORCE_64_BIT} EQUAL "1")
+if(${ENFORCE_64_BIT})
 	set(ASM_FLAGS ${ASM_FLAGS} -m64)
-endif(${ENFORCE_64_BIT} EQUAL "1")
+endif(${ENFORCE_64_BIT})
 
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lj_vm.o
 	COMMAND gcc
@@ -73,15 +73,15 @@ else(UNIX)
 	endif(WIN32)
 endif(UNIX)
 
-if(NOT ${definitions} EQUAL "")
+if(NOT ${definitions})
 	add_definitions(${definitions})
-endif(NOT ${definitions} EQUAL "")
+endif()
 
-if(NOT ${compile_flags} EQUAL "")
+if(NOT ${compile_flags})
 	set_target_properties(luaexe luajit PROPERTIES COMPILE_FLAGS ${compile_flags})
-endif(NOT ${compile_flags} EQUAL "")
-if(NOT ${link_flags} EQUAL "")
+endif()
+if(NOT ${link_flags})
 	set_target_properties(luaexe luajit PROPERTIES LINK_FLAGS ${link_flags})
-endif(NOT ${link_flags} EQUAL "")
+endif()
 
 target_link_libraries(luaexe ${LIBS})

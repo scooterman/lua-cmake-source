@@ -4,11 +4,11 @@ add_executable(test  ${test_files})
 
 set(ADD_LIBS "")
 
-if(${WITH_LUAJIT} EQUAL "1")
+if(${WITH_LUAJIT})
 	set(ADD_LIBS ${ADD_LIBS} luajit)
-else(${WITH_LUAJIT} EQUAL "1")
+else(${WITH_LUAJIT})
 	set(ADD_LIBS ${ADD_LIBS} lua)
-endif(${WITH_LUAJIT} EQUAL "1")
+endif(${WITH_LUAJIT})
 
 if(NOT WIN32)
 	set(ADD_LIBS ${ADD_LIBS} m dl)
